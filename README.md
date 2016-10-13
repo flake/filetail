@@ -2,7 +2,7 @@
 
 clone the repo
 
-$ cd filetail
+$ cd filetail <br>
 $ meteor
 
 navigate to http://localhost:3000/ in browser
