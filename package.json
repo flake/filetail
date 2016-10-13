@@ -1,0 +1,13 @@
+{
+  "name": "filetail",
+  "private": true,
+  "scripts": {
+    "start": "meteor run"
+  },
+  "dependencies": {
+    "buffered-file-line-reader-sync": "^0.1.0",
+    "fs": "0.0.1-security",
+    "line-navigator": "^2.1.4",
+    "meteor-node-stubs": "^0.2.3"
+  }
+}

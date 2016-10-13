@@ -1,0 +1,42 @@
+<!--
+@Author: rajasekhar
+@Date:   2016-10-13T15:18:30+05:30
+@Last modified by:   rajasekhar
+@Last modified time: 2016-10-13T16:59:12+05:30
+-->
+
+
+
+<head>
+  <title>filetail</title>
+</head>
+
+<body>
+  <h1>Welcome to Tailer!</h1>
+
+  {{> filepick}}
+</body>
+
+<template name="filepick">
+  <div class="margin-16">
+    <div class="input-field col s6">
+      <label for="line_count">No of lines</label>
+      <input placeholder="Line count" id="line_count" type="text" class="validate" size="10">
+    </div>
+    <div class="input-field col s6">
+      <label for="file_pick">file path</label>
+      <input id="file_pick" type="file" class="validate">
+    </div>
+    <div class="input-field col s6">
+      <input id="file_submit" type="submit" >
+    </div>
+    <div id="tail-log">
+      
+    </div>
+  </div>
+</template>
+
+<template name="tailerLines">
+  <div>
+  </div>
+</template>
