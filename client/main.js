@@ -2,7 +2,7 @@
 * @Author: rajasekhar
 * @Date:   2016-10-13T15:18:30+05:30
 * @Last modified by:   rajasekhar
-* @Last modified time: 2016-10-13T17:45:44+05:30
+* @Last modified time: 2016-10-13T18:43:43+05:30
 */
 
 
@@ -31,13 +31,15 @@ Template.filepick.events({
     var reader = new FileReader();
     reader.onload = function(e){
       var lines = e.target.result.split("\n");
-      // lineCount = lines.length;
-      Session.set('lineCount', lines.length);
+      var lineCount = lines.length;
+      if(lineCount == 0){ lineCount = 1; }
+      Session.set('lineCount', lineCount);
     };
     reader.readAsText(file);
-
-    while(Session.get('lineCount') == 0){}
-    var lineCount = Session.get('lineCount');
+    var lineCount = 0;
+    Match.setTimeout(function(){
+      lineCount = Session.get('lineCount');
+    }, 1000);
     console.log("lineCount " + lineCount);
 
     var startIndex = lineCount-nooflines;
