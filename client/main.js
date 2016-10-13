@@ -2,7 +2,7 @@
 * @Author: rajasekhar
 * @Date:   2016-10-13T15:18:30+05:30
 * @Last modified by:   rajasekhar
-* @Last modified time: 2016-10-13T18:43:43+05:30
+* @Last modified time: 2016-10-13T18:47:38+05:30
 */
 
 
@@ -31,35 +31,34 @@ Template.filepick.events({
     var reader = new FileReader();
     reader.onload = function(e){
       var lines = e.target.result.split("\n");
-      var lineCount = lines.length;
+      var lineCount = lines.length - 1;
       if(lineCount == 0){ lineCount = 1; }
       Session.set('lineCount', lineCount);
     };
     reader.readAsText(file);
     var lineCount = 0;
-    Match.setTimeout(function(){
+    Meteor.setTimeout(function(){
       lineCount = Session.get('lineCount');
-    }, 1000);
-    console.log("lineCount " + lineCount);
+      console.log("lineCount " + lineCount);
+      var startIndex = lineCount-nooflines;
+      if(startIndex < 0){ startIndex = 0}
 
-    var startIndex = lineCount-nooflines;
-    if(startIndex < 0){ startIndex = 0}
+      var readFile = true;
 
-    var readFile = true;
+      var navigator = new LineNavigator(file);
 
-    var navigator = new LineNavigator(file);
-
-    var endFile = false;
-    // while(!endFile){
-      navigator.readLines(startIndex, nooflines, function(err, index, lines, isEof, progress){
-        endFile = isEof;
-        lines.map(function(line){
-          console.log("line " + line);
-          $('#tail-log').append(line + "<br>");
-          startIndex++;
+      var endFile = false;
+      // while(!endFile){
+        navigator.readLines(startIndex, nooflines, function(err, index, lines, isEof, progress){
+          endFile = isEof;
+          lines.map(function(line){
+            console.log("line " + line);
+            $('#tail-log').append(line + "<br>");
+            startIndex++;
+          });
         });
-      });
-    // }
+      // }
+    }, 1000);
   },
 
   'click #file_submit'(event, instance){
